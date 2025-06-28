@@ -1,0 +1,143 @@
+🔬 Wedge 400 SPI Flash Post-Mortem Report
+🧾 Overview
+This technical post-mortem covers four Facebook/OCP Wedge 400 switches purchased under the listing “Tested for Key Functionality.”
+After forensic firmware extraction and analysis, none of the devices booted, produced UART output, or initialized PCIe. All were found to be non-functional due to missing or incomplete SPI flash firmware — including U-Boot and ONIE.
+
+📊 Summary of Findings
+| Unit # | SPI Dump Filename       | Bootloader Found | BIOS Version     | Status    |
+| ------ | ----------------------- | ---------------- | ---------------- | --------- |
+| 1      | `Wedge-400-1@SOIC8.BIN` | ❌ None Detected  | AMI Aptio 5.6.5  | BIOS-only |
+| 2      | `Wedge-400-2@SOIC8.BIN` | ❌ None Detected  | AMI Aptio 5.12.0 | BIOS-only |
+| 3      | `wedge-400-3@SOIC8.BIN` | ❌ None Detected  | AMI Aptio 5.12.0 | BIOS-only |
+| 4      | `Wedge-400-4@SOIC8.BIN` | ❌ None Detected  | AMI Aptio 5.6.5  | BIOS-only |
+⚠️ None of the SPI dumps contain a valid U-Boot, ONIE, or any embedded switching logic. These devices cannot POST, emit diagnostics, or act as switches in any capacity.
+
+⚙️ Expected Boot Flow (x86 U-Boot)
+Power-On  
+   ↓  
+SPI Flash → [ U-Boot SPL → U-Boot Proper → ONIE or OS Payload ]  
+   ↓  
+Serial Output (UART)  
+   ↓  
+PCIe Bus Init  
+   ↓  
+OS Load  
+Per U-Boot x86 Documentation:
+“The firmware is assumed to live in SPI flash mapped to FFFF_FFFF. This includes U-Boot SPL, U-Boot proper, and any optional payloads like ONIE.”
+— U-Boot x86 README (https://source.denx.de/u-boot/u-boot/-/tree/master)
+
+
+🧪 Technical Breakdown
+🔧 1. Missing Bootloaders (All Units)
+❌ No valid U-Boot or ONIE detected
+
+❌ No known compressed payloads (gzip/LZMA)
+
+❌ No SPL/init code or PCIe setup
+
+🧼 SPI dumps show padded 0xFF blocks — consistent with sanitized firmware
+
+🔍 2. Zero Hardware Initialization
+❌ No SCM (Switch Control Module) activation
+
+❌ No PCIe enumeration — even with RAM and NVMe installed
+
+❌ No UART serial output
+
+❌ Cannot load OS from SSD, PXE, or any fallback method
+
+🔥 3. Invalid Firmware Layouts
+🧩 Partial U-Boot strings and version fragments detected
+
+🧪 Some dumps appear to be test or factory stubs
+
+❌ No MAC address region, serial tag blocks, or ONIE payload
+
+📉 Entropy graphs confirm lack of meaningful boot logic
+
+🧬 Case Focus: Wedge-400-2@SOIC8.BIN
+Fragments of U-Boot headers and strings found
+
+Entropy confirms some code presence
+
+But:
+
+❌ No SPL routines
+
+❌ No DRAM or PCIe init
+
+❌ No payload or shell logic
+
+🔇 UART is silent or produces garbage
+
+🧠 Conclusion: Fragments ≠ Functionality. This dump is non-bootable and unrepairable without full reflash.
+
+🟥 Misrepresentation & Shipping Violations
+❌ “Key Functionality Tested” — False Claim
+No unit can POST or emit console output
+
+No firmware = no testable functions
+
+⚠️ No ESD Packaging
+Units shipped raw in cardboard
+
+❌ No anti-static wrap, foam, or bags
+
+🔧 Violates ANSI/ESD S20.20
+
+📦 Excessive Return Burden
+4x units × ~41 lbs = 160+ lbs return
+
+Industrial ESD prep required to rebox safely
+
+Packaging discarded under assumption of seller honesty
+
+📣 Formal Request
+Due to:
+
+Missing critical firmware
+
+Proven falsification of “tested” claim
+
+Unsafe handling during shipment
+
+Excessive logistical return burden
+
+I request a full refund with no return required.
+
+✅ Supporting Evidence:
+4x SPI dumps (.BIN)
+
+JEDEC ID readouts (e.g., W25Q128FV)
+
+Annotated hex and entropy comparisons
+
+Firmware offset maps and string traces
+
+🧠 Final Remarks
+These units bear all signs of hyperscaler decommissioning:
+
+SPI flash was sanitized, as is routine for Meta, AWS, Azure, etc.
+
+No functional logic survives to allow POST or diagnostics.
+
+Units cannot be used in any switching role without advanced reflashing and code reconstruction.
+
+These are bricks, not switches.
+Reflashing is non-trivial. Return shipping is excessive.
+The listing was materially false.
+
+⚠️ TL;DR Summary
+🛑 All 4 units are firmware-dead — no U-Boot, ONIE, or hardware init
+
+🛠️ SPI dumps show signs of data wiping and code stubs
+
+❌ Not “tested” — zero switching or boot capability
+
+📦 Shipped dangerously and cost-prohibitively to return
+
+Resolution: Full refund, no return. Evidence is conclusive.
+
+
+
+
