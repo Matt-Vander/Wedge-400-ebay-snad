@@ -1,0 +1,39 @@
+
+APP Version : 12.90   Model : T48  MFG:2024-03-03
+     Device : W25Q128FV @SOIC8
+
+*************************************************
+ 1 Programmer Connected.
+*************************************************
+  Device 1: T48 [TL866-3G] Ver: 00.01.34
+       USB POWER VOLTAGE: 04.96V
+       USB SPEED MODE: USB2.0 HS 480MHZ
+
+*************************************************
+ 
+W25Q128FV @SOIC8
+  Memory Size : 0x01000000
+Saved log to: C:\Users\Matth\Desktop\log.txt
+
+ No Programmer Found.
+
+*************************************************
+ 1 Programmer Connected.
+*************************************************
+  Device 1: T48 [TL866-3G] Ver: 00.01.34
+       USB POWER VOLTAGE: 04.94V
+       USB SPEED MODE: USB2.0 HS 480MHZ
+
+*************************************************
+Saved log to: C:\Users\Matth\Desktop\Wedge 400 Uboot missing\wedge 2\log.txt
+
+ No Programmer Found.
+
+*************************************************
+ 1 Programmer Connected.
+*************************************************
+  Device 1: T48 [TL866-3G] Ver: 00.01.34
+       USB POWER VOLTAGE: 04.96V
+       USB SPEED MODE: USB2.0 HS 480MHZ
+
+*************************************************
